@@ -1,0 +1,157 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+* input,
+* button,
+* label {
+  cursor: pointer;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background-color: #1f2937;
+}
+body .container {
+  background-color: aliceblue;
+  padding: 30px;
+  border-radius: 8px;
+  align-self: center;
+  margin: 20px 100px 0;
+}
+body .container h2 {
+  text-align: center;
+  font-size: 33px;
+  margin-bottom: 20px;
+  font-weight: 700;
+  color: rgb(45, 45, 45);
+}
+body .container .input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+body .container .input-group.checkbox {
+  flex-direction: row;
+}
+body .container .input-group.discount {
+  display: none;
+}
+body .container .input-group input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(128, 128, 128, 0.692);
+  transition: all 0.3s;
+  outline: none;
+}
+body .container .input-group input:focus {
+  border-color: blue;
+  box-shadow: 5px 5px 10px rgba(128, 128, 128, 0.249);
+}
+body .container .input-group label {
+  font-size: 17px;
+  color: rgb(49, 49, 49);
+}
+body .container h1 {
+  text-align: center;
+  font-size: 45px;
+  color: rgb(1, 1, 34);
+  margin-bottom: 30px;
+}
+body .container-bottom {
+  display: flex;
+  gap: 40px;
+}
+body .container-bottom aside {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 25%;
+  box-shadow: 0px 0px 20px rgba(128, 128, 128, 0.381);
+  padding: 40px 20px;
+  border-radius: 8px;
+}
+body .container-bottom aside .add {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background-color: rgba(0, 128, 0, 0.824);
+  color: white;
+  font-size: 17px;
+  margin-top: 30px;
+}
+body .container-bottom main {
+  width: 70%;
+}
+body .container-bottom main .filter {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  box-shadow: 5px 5px 30px rgba(128, 128, 128, 0.249);
+  padding: 20px;
+  border-radius: 8px;
+  gap: 20px;
+}
+body .container-bottom main .filter h2 {
+  text-align: start;
+}
+body .container-bottom main .filter .input-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+body .container-bottom main .filter .input-group select {
+  padding: 10px;
+  width: 20rem;
+  border-radius: 8px;
+}
+body .container-bottom .table {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+body .container-bottom .table table {
+  border-collapse: collapse;
+}
+body .container-bottom .table thead th {
+  background-color: rgba(31, 41, 55, 0.8156862745);
+  color: white;
+  padding: 10px 43px;
+  border: 1px solid rgb(255, 255, 255);
+}
+body .container-bottom .table tbody .not {
+  padding-block: 40px;
+  font-size: 30px;
+  color: gray;
+}
+body .container-bottom .table tbody td {
+  border: 1px solid rgba(128, 128, 128, 0.283);
+  text-align: center;
+  background-color: white;
+}
+body .container-bottom .table tbody td span {
+  padding: 3px;
+  border-radius: 20%;
+  background-color: green;
+  color: white;
+}
+body .container-bottom .table tbody td img {
+  width: 40%;
+}
+body .container-bottom .table tbody td button {
+  padding: 5px;
+  border: none;
+  color: white;
+  border-radius: 5px;
+}
+body .container-bottom .table tbody td button.delete {
+  background-color: rgba(255, 0, 0, 0.664);
+}
+body .container-bottom .table tbody td button.edit {
+  background-color: rgb(131, 131, 65);
+}/*# sourceMappingURL=style.css.map */
