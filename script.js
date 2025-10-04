@@ -170,11 +170,13 @@ filterInput.addEventListener("change", () => {
     items.sort((a, b) => b.name.localeCompare(a.name));
   } else if (filterInput.value == 3) {
     items.sort(
-      (a, b) => a.price * (a.discount / 100) - b.price * (b.discount / 100)
+      (a, b) =>
+        a.price * (1 - a.discount / 100) - b.price * (1 - b.discount / 100)
     );
   } else {
     items.sort(
-      (a, b) => b.price * (b.discount / 100) - a.price * (a.discount / 100)
+      (a, b) =>
+        b.price * (1 - b.discount / 100) - a.price * (1 - a.discount / 100)
     );
   }
 
