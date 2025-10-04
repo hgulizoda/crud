@@ -62,7 +62,7 @@ function addItem() {
       id: Date.now(),
     });
   }
-
+  saveToStorage();
   renderItems();
 }
 
@@ -72,6 +72,7 @@ aside.addEventListener("keydown", (e) => {
 });
 
 window.addEventListener("DOMContentLoaded", () => {
+  loadItems();
   renderItems();
 });
 
@@ -125,6 +126,7 @@ function renderItems() {
 function deleteItem(id) {
   items = items.filter((item) => item.id !== id);
   renderItems();
+  saveToStorage();
 }
 
 tbody.addEventListener("click", (e) => {
@@ -178,3 +180,10 @@ filterInput.addEventListener("change", () => {
 
   renderItems();
 });
+function saveToStorage() {
+  localStorage.setItem("items", JSON.stringify(items));
+}
+
+function loadItems() {
+  items = JSON.parse(localStorage.getItem("items")) || [];
+}
