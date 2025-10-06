@@ -1,5 +1,6 @@
 let items = [];
 let updatedId = null;
+let cartItems = [];
 
 const addBtn = document.querySelector(".add");
 const nameInput = document.getElementById("name");
@@ -74,19 +75,19 @@ aside.addEventListener("keydown", (e) => {
 window.addEventListener("DOMContentLoaded", () => {
   loadItems();
   renderItems();
+  renderCart();
 });
-
-console.log(items);
 
 function renderItems() {
   if (items.length === 0) {
     tbody.innerHTML = `
       <tr>
-        <td colspan="6" class="not">Mahsulot topilmadi!</td>
+        <td colspan="6" class="not">No products added!</td>
       </tr>`;
   } else {
     tbody.innerHTML = items
       .map((item) => {
+        const isInCart = cartItems.findIndex((c) => c.id === item.id);
         const priceHTML =
           item.onSale && item.discount > 0
             ? `
@@ -103,8 +104,14 @@ function renderItems() {
             <td>${item.name}</td>
             <td>${priceHTML}</td>
             <td>${item.count}</td>
-            <td>${item.discount}%</td>
+            ${
+              item.discount === 0 || item.discount === ""
+                ? `<td>0%</td>`
+                : `<td>${item.discount}%</td>`
+            }
             <td>
+        
+            ${isInCart === -1 ? `<button class="buy">Buy</button>` : ""}
               <button class="edit">Edit</button>
               <button class="delete">Delete</button>
             </td>
@@ -127,6 +134,7 @@ function deleteItem(id) {
   items = items.filter((item) => item.id !== id);
   renderItems();
   saveToStorage();
+  loadItems();
 }
 
 tbody.addEventListener("click", (e) => {
@@ -140,6 +148,11 @@ tbody.addEventListener("click", (e) => {
     const id = +row.dataset.id;
     editItem(id);
   }
+  if (e.target.classList.contains("buy")) {
+    const row = e.target.closest("tr");
+    const id = +row.dataset.id;
+    addToCart(id);
+  }
 });
 
 function editItem(id) {
@@ -152,6 +165,15 @@ function editItem(id) {
   countInput.value = updated.count;
   discountInput.value = updated.discount;
   addBtn.innerHTML = "Edit";
+}
+
+function addToCart(id) {
+  const cartItem = items.find((item) => item.id === id);
+  cartItems.push(cartItem);
+  uploadNumber();
+  renderItems();
+  renderCart();
+  saveToStorage();
 }
 
 onSale.addEventListener("change", () => {
@@ -182,10 +204,107 @@ filterInput.addEventListener("change", () => {
 
   renderItems();
 });
+
+const drawerOverlay = document.getElementById("drawer-overlay");
+const drawer = document.getElementById("drawer-bar");
+const closeDrawer = document.getElementById("close-drawer");
+const drawerBtn = document.querySelector(".cart");
+drawerBtn.style.cursor = "pointer";
+closeDrawer.style.cursor = "pointer";
+const numberOfItems = document.querySelector(".number");
+
+drawer.addEventListener("click", (e) => {
+  e.stopPropagation();
+});
+
+drawerBtn.addEventListener("click", () => {
+  drawerOverlay.classList.add("openedX");
+  drawer.classList.add("openedX");
+  document.body.style.overflow = "hidden";
+});
+
+closeDrawer.addEventListener("click", () => {
+  drawerOverlay.classList.remove("openedX");
+  drawer.classList.remove("openedX");
+  document.body.style.overflowY = "visible";
+});
+
+drawerOverlay.addEventListener("click", () => {
+  drawerOverlay.classList.remove("openedX");
+  drawer.classList.remove("openedX");
+  document.body.style.overflowY = "visible";
+});
+
+function uploadNumber() {
+  numberOfItems.innerHTML = `(${cartItems.length})`;
+}
+const productList = document.querySelector(".product-list");
+const numberInside = document.querySelector(".numberInside");
+const totalPrice = document.querySelector(".total-price");
+const actualPrice = document.querySelector(".actual-price");
+const countOfProducts = document.querySelector(".countOfProducts");
+
+function renderCart() {
+  if (cartItems.length === 0) {
+    productList.innerHTML = "<p>Cart is empty!</p>";
+  } else {
+    productList.innerHTML = cartItems
+      .map((item) => {
+        return `<div class="drawer-bar" data-id="${item.id}">
+              <img src="${item.url}" alt="" />
+              <div>
+                <p>${item.name}</p>
+                <b>1 kg x <span>$${item.price}</span> <span class="newPrice">$${
+          item.price * (1 - item.discount / 100)
+        }</span> <span class="actual-price"></span></b>
+              </div>
+              <button class="deleteCartItem">x</button>
+            </div>`;
+      })
+      .join("");
+  }
+  numberInside.innerHTML = `(${cartItems.length})`;
+  countOfProducts.innerHTML = `${cartItems.length} Product${
+    cartItems.length === 1 ? "" : "s"
+  }`;
+  totalPrice.innerHTML = `$${cartItems.reduce(
+    (sum, cur) => sum + cur.price * (1 - cur.discount / 100),
+    0
+  )}.00`;
+  actualPrice.innerHTML = `$${cartItems.reduce(
+    (sum, cur) => sum + cur.price,
+    0
+  )}`;
+}
+
+const deleteCartItem = document.querySelector(".deleteCartItem");
+
+productList.addEventListener("click", (e) => {
+  if (e.target.classList.contains("deleteCartItem")) {
+    const row = e.target.closest(".drawer-bar");
+    const id = +row.dataset.id;
+    removeFromCart(id);
+  }
+});
+
+function removeFromCart(id) {
+  cartItems = cartItems.filter((item) => item.id !== id);
+  renderCart();
+  renderItems();
+  console.log(numberInside);
+
+  numberInside.innerHTML = `(${cartItems.length})`;
+  console.log(numberInside);
+  uploadNumber();
+  saveToStorage();
+}
+
 function saveToStorage() {
   localStorage.setItem("items", JSON.stringify(items));
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
 }
 
 function loadItems() {
   items = JSON.parse(localStorage.getItem("items")) || [];
+  cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
 }

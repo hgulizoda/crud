@@ -3,6 +3,7 @@
   margin: 0;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
 }
 * input,
 * button,
@@ -157,4 +158,153 @@ body .container-bottom .table tbody td button.delete {
 }
 body .container-bottom .table tbody td button.edit {
   background-color: rgb(131, 131, 65);
+}
+body .container-bottom .table tbody td button.buy {
+  background-color: green;
+}
+
+.drawer-overlay {
+  background-color: rgba(0, 0, 0, 0.699);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  transform: translateX(100vw);
+}
+.drawer-overlay.openedX {
+  transform: translateX(0);
+}
+.drawer-overlay .drawer-box {
+  background-color: white;
+  width: 400px;
+  height: 100%;
+  padding: 30px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: translateX(500px);
+  transition: all 0.3s ease;
+}
+.drawer-overlay .drawer-box .newPrice {
+  padding: 3px 7px;
+  border-radius: 20%;
+  background-color: green;
+  color: white !important;
+  font-weight: 400;
+}
+.drawer-overlay .drawer-box button {
+  padding: 8px;
+  border: 1px solid #cccccc;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.drawer-overlay .drawer-box.openedX {
+  transform: translateX(0);
+}
+.drawer-overlay .drawer-box .absolute {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.drawer-overlay .drawer-box h2 {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 150%;
+  letter-spacing: 0%;
+}
+.drawer-overlay .drawer-box .product-list {
+  margin-top: 30px;
+}
+.drawer-overlay .drawer-box .drawer-bar {
+  margin-top: 30px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e6e6e6;
+}
+.drawer-overlay .drawer-box .drawer-bar:last-child {
+  border-bottom: none;
+}
+.drawer-overlay .drawer-box .drawer-bar img {
+  width: 20%;
+  aspect-ratio: 1/1;
+}
+.drawer-overlay .drawer-box .drawer-bar div {
+  width: 60%;
+}
+.drawer-overlay .drawer-box .drawer-bar div p {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 0%;
+}
+.drawer-overlay .drawer-box .drawer-bar div b {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  color: #808080;
+}
+.drawer-overlay .drawer-box .drawer-bar div b span {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+.drawer-overlay .drawer-box .drawer-bar button {
+  font-size: 14px;
+  padding: 8px;
+  border: 1px solid #cccccc;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.drawer-overlay .drawer-box .drawer-bottom {
+  display: flex;
+  flex-direction: column;
+}
+.drawer-overlay .drawer-box .drawer-bottom_top {
+  display: flex;
+  justify-content: space-between;
+}
+.drawer-overlay .drawer-box .drawer-bottom_top p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
+}
+.drawer-overlay .drawer-box .drawer-bottom_top b {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+  letter-spacing: 0%;
+}
+.drawer-overlay .drawer-box .drawer-bottom button {
+  width: 100%;
+  padding-block: 16px;
+  background-color: rgba(86, 172, 89, 0.1019607843);
+  color: green;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  border: none;
+  border-radius: 43px;
+}
+.drawer-overlay .drawer-box .drawer-bottom button.checkout {
+  background-color: green;
+  color: white;
+  margin-block: 24px 12px;
 }/*# sourceMappingURL=style.css.map */

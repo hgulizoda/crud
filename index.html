@@ -59,6 +59,7 @@
                 <option value="4">Price descending</option>
               </select>
             </div>
+            <p class="cart">Cart <span class="numberInside">(0)</span></p>
           </div>
           <div class="table">
             <h2>List of Products:</h2>
@@ -77,6 +78,25 @@
             </table>
           </div>
         </main>
+      </div>
+    </div>
+
+    <div class="drawer-overlay" id="drawer-overlay">
+      <div class="drawer-box" id="drawer-bar">
+        <div class="drawer-top">
+          <button class="absolute" id="close-drawer">x</button>
+          <h2>Shopping Card <span class="number">(0)</span></h2>
+          <div class="product-list"></div>
+        </div>
+
+        <div class="drawer-bottom">
+          <div class="drawer-bottom_top">
+            <p class="countOfProducts">2 Product</p>
+            <b class="total-price">$26.00 <span class="actual-price"></span></b>
+          </div>
+          <button class="checkout">Checkout</button>
+          <p><button>Go To Cart</button></p>
+        </div>
       </div>
     </div>
     <script src="./script.js"></script>
