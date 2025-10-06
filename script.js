@@ -256,7 +256,7 @@ function renderCart() {
                 <p>${item.name}</p>
                 <b>1 kg x <span>$${item.price}</span> <span class="newPrice">$${
           item.price * (1 - item.discount / 100)
-        }</span> <span class="actual-price"></span></b>
+        }</span> </b>
               </div>
               <button class="deleteCartItem">x</button>
             </div>`;
